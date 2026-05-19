@@ -1,0 +1,82 @@
+[project]
+name = "video-transcriber"
+version = "0.1.0"
+description = "A simple video transcription tool using OpenAI Whisper"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["transcription", "video", "audio", "whisper", "speech-to-text"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Topic :: Multimedia :: Video",
+]
+
+dependencies = [
+    "openai-whisper>=20231117",
+    "moviepy>=1.0.3",
+    "numpy<2",  # Whisper requires numpy<2 for compatibility
+    "torch>=2.0.0",  # Required by whisper
+    "ffmpeg-python>=0.2.0",  # Helpful for additional ffmpeg operations
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+]
+
+# For faster transcription (GPU acceleration with CUDA)
+cuda = [
+    "nvidia-cublas-cu11",
+    "nvidia-cudnn-cu11",
+]
+
+# For the faster-whisper alternative (more efficient)
+faster = [
+    "faster-whisper>=1.0.0",
+]
+
+[project.scripts]
+video-transcribe = "video_transcriber.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/video-transcriber"
+Repository = "https://github.com/yourusername/video-transcriber"
+"Bug Tracker" = "https://github.com/yourusername/video-transcriber/issues"
+
+[tool.black]
+line-length = 88
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+ignore = []
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
