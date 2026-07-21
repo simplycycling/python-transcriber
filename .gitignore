@@ -12,5 +12,7 @@ wheels/
 # Runtime-generated temp files
 *.wav
 
-# Local Python version pin
-.python-version
+# Transcript output
+transcript.txt
+*.srt
+*.vtt
